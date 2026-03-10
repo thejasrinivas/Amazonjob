@@ -19,12 +19,12 @@ EMAIL_RECEIVER = os.getenv("EMAIL_RECEIVER")
 
 def send_telegram_alert(message):
     tg_url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    tg_payload = {"chat_id": TELEGRAM_CHAT_ID, "text": job_summary, "parse_mode": "HTML"}
+    tg_payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
     requests.post(tg_url, data=tg_payload)
 
 
 def send_email(job_details):
-    msg = MIMEText(job_summary, 'html')
+    msg = MIMEText(job_details, 'html')
     msg['Subject'] = f"🚨 Amazon Job Alert: {PINCODE}"
     msg['From'] = EMAIL_SENDER
     msg['To'] = EMAIL_RECEIVER
