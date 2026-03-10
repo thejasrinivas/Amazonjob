@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 
 # --- CONFIG ---
-PINCODE = " "
+PINCODE = os.getenv("PINCODE")
 URL = "https://www.jobsatamazon.co.uk/app#/jobSearch"
 
 # --- TELEGRAM CONFIG ---
