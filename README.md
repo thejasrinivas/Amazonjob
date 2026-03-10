@@ -1,4 +1,4 @@
-# 🚀 Amazon Job Agent AI
+# 🚀 Amazon UK Warehouse Job Agentic AI 
 
 An automated cloud-based agent that monitors the Amazon Jobs portal for new openings in a specific area. It uses **Playwright** for browser automation, **BeautifulSoup** for data extraction, and **GitHub Actions** to run 24/7 for free.
 
