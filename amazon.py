@@ -41,27 +41,23 @@ def run_scraper():
 
         try:
             page.goto(URL, wait_until="load")
-            # --- POPUP CLEANUP (Using your screenshot info) ---
-            # 1. Close Cookie/Consent Popup
+            # --- POPUP CLEANUP ---
+            # Try a slightly longer timeout for headless
             try:
-                page.wait_for_selector('button[aria-label*="Close cookie consent"]', timeout=5000)
+                page.wait_for_selector('button[aria-label*="Close cookie consent"]', timeout=8000)
                 page.click('button[aria-label*="Close cookie consent"]')
-            except: pass
-
-            # 2. Close "Want to get notified" (The second 'X' you saw)
-            try:
-                page.wait_for_selector('button[aria-label="Close"]', timeout=3000)
-                page.click('button[aria-label="Close"]')
             except: pass
 
             # --- SEARCH PHASE ---
             print("Entering Pincode...")
-            page.wait_for_selector('#zipcode-nav-search', timeout=10000)
+            # Use 'attached' state if visible fails in headless
+            page.wait_for_selector('#zipcode-nav-search', state="attached", timeout=15000)
+            
             page.fill('#zipcode-nav-search', PINCODE)
             page.keyboard.press("Enter")
             
-            # Allow time for results to render
-            time.sleep(7) 
+            # Wait for results
+            time.sleep(8)
             
             # Parse results
             soup = BeautifulSoup(page.content(), 'html.parser')
